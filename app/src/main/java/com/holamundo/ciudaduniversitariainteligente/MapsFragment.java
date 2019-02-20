@@ -675,5 +675,146 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
         super.onDestroyView();
     }
 
+    public void mostrarCaminoCaminando()
+    {
+        //LA URL PARA CONSULTAR AL WEBSERVICE SE USAR COMO SE VE:
+        //ORIGIN
+        //DESTINATION
+        //KEY
+        //SON PARAMETROS
+        //SI SE PONE EN EL BROWSER TE MUESTRA LA RESPUESTA JSON O LOS ERRORES
+        String key = "&key=" + "AIzaSyAY3_zaZiIwKVqIlbgTaTLCacnJaoklQ1U";
 
+        String modo;
+        //segun la bandera booleana
+        //si caminando = true, muestro recorrido caminando
+        //si caminando = false, muestro recorrido manejando
+        modo = "&mode=" + "walking";
+
+        //String url = "http://cuandopasa.smartmovepro.net/Paginas/Paginas/Recorridos.aspx/RecuperarRecorrido";
+
+        //armo la url
+        //String url ="https://maps.googleapis.com/maps/api/directions/json?origin="+this.lat+","+this.lon+"&destination=-31.640771, -60.671849"+ key + modo;
+        String url ="https://maps.googleapis.com/maps/api/directions/json?origin=-31.6177085,-60.6841818&destination=-31.640771, -60.671849"+ key + modo;
+
+
+        Log.i("url: ",""+url);
+
+        //Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+
+        //Toast.makeText(getActivity().getApplicationContext(),url, Toast.LENGTH_LONG).show();
+
+
+
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONObject jso = new JSONObject(response);
+                    Toast.makeText(getActivity().getApplicationContext(),jso.toString(), Toast.LENGTH_LONG).show();
+
+                    //trazo
+                    trazarRuta(jso);
+
+                    //muestro
+                    mostrarDistanciaTiempo(jso);
+
+                    Log.i("jsonRuta: ",""+response);
+
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity().getApplicationContext(), "ERROR DE CONEXIÓN", Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        queue.add(stringRequest);
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+
+    }
+
+    public void mostrarCaminoManejando()
+    {
+        //LA URL PARA CONSULTAR AL WEBSERVICE SE USAR COMO SE VE:
+        //ORIGIN
+        //DESTINATION
+        //KEY
+        //SON PARAMETROS
+        //SI SE PONE EN EL BROWSER TE MUESTRA LA RESPUESTA JSON O LOS ERRORES
+        String key = "&key=" + "AIzaSyAY3_zaZiIwKVqIlbgTaTLCacnJaoklQ1U";
+
+        String modo;
+        //segun la bandera booleana
+        //si caminando = true, muestro recorrido caminando
+        //si caminando = false, muestro recorrido manejando
+        modo = "&mode=" + "driving";
+
+        //String url = "http://cuandopasa.smartmovepro.net/Paginas/Paginas/Recorridos.aspx/RecuperarRecorrido";
+
+        //armo la url
+        //String url ="https://maps.googleapis.com/maps/api/directions/json?origin="+this.lat+","+this.lon+"&destination=-31.640771, -60.671849"+ key + modo;
+        String url ="https://maps.googleapis.com/maps/api/directions/json?origin=-31.6177085,-60.6841818&destination=-31.640771, -60.671849"+ key + modo;
+
+
+        Log.i("url: ",""+url);
+
+        //Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+
+        //Toast.makeText(getActivity().getApplicationContext(),url, Toast.LENGTH_LONG).show();
+
+
+
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONObject jso = new JSONObject(response);
+                    Toast.makeText(getActivity().getApplicationContext(),jso.toString(), Toast.LENGTH_LONG).show();
+
+                    //trazo
+                    trazarRuta(jso);
+
+                    //muestro
+                    mostrarDistanciaTiempo(jso);
+
+                    Log.i("jsonRuta: ",""+response);
+
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity().getApplicationContext(), "ERROR DE CONEXIÓN", Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        queue.add(stringRequest);
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+    }
 }

@@ -289,12 +289,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void mostrarCaminoCaminando(android.view.View view)
     {
         Toast.makeText(this,"CLICK IR CAMINANDO", Toast.LENGTH_LONG).show();
+
+        this.mapsFragment.mostrarCaminoCaminando();
     }
 
     //evento para trazar la ruta si se va manejando
     public void mostrarCaminoManejando(android.view.View view)
     {
         Toast.makeText(this,"CLICK IR MANEJANDO", Toast.LENGTH_LONG).show();
+
+        this.mapsFragment.mostrarCaminoManejando();
     }
 
 
