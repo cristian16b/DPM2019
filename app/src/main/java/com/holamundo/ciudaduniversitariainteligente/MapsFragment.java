@@ -284,7 +284,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
 
-        
+
         ///
 
         //Agrego los marcadores adicionales (Edificios, baños, bares,etc), si los hay
@@ -674,4 +674,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
     public void onDestroyView() {
         super.onDestroyView();
     }
+
+    
+
+
 }
