@@ -675,7 +675,5 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
         super.onDestroyView();
     }
 
-    
-
 
 }
