@@ -230,27 +230,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
 
         //Toast.makeText(getActivity().getApplicationContext(),, Toast.LENGTH_LONG).show();
 
-
-        //LA URL PARA CONSULTAR AL WEBSERVICE SE USAR COMO SE VE:
-        //ORIGIN
-        //DESTINATION
-        //KEY
-        //SON PARAMETROS
-        //SI SE PONE EN EL BROWSER TE MUESTRA LA RESPUESTA JSON O LOS ERRORES
-        String key = "&key=" + getKey();
-
-        String modo;
-        //segun la bandera booleana
-        //si caminando = true, muestro recorrido caminando
-        //si caminando = false, muestro recorrido manejando
-        modo = "&mode=" + "walking";
-
-        //String url = "http://cuandopasa.smartmovepro.net/Paginas/Paginas/Recorridos.aspx/RecuperarRecorrido";
-
-        //armo la url
-        //String url ="https://maps.googleapis.com/maps/api/directions/json?origin="+this.lat+","+this.lon+"&destination=-31.640771, -60.671849"+ key + modo;
-        String url ="https://maps.googleapis.com/maps/api/directions/json?origin=-31.6177085,-60.6841818&destination=-31.640771, -60.671849"+ key + modo;
-
+        String url = armaUrl(true);
 
         Log.i("url: ",""+url);
 
@@ -330,6 +310,37 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
             //miMapa.moveCamera(CameraUpdateFactory.newLatLngBounds(misOverlays.elementAt(pisoActual).elementAt(0).getBounds(),0));
             miMapa.moveCamera(CameraUpdateFactory.zoomTo(18));
         }
+    }
+
+    //funcion para armar la ruta
+    private String armaUrl(boolean bandera)
+    {
+        //LA URL PARA CONSULTAR AL WEBSERVICE SE USAR COMO SE VE:
+        //ORIGIN
+        //DESTINATION
+        //KEY
+        //SON PARAMETROS
+        //SI SE PONE EN EL BROWSER TE MUESTRA LA RESPUESTA JSON O LOS ERRORES
+        String key = "&key=" + getKey();
+
+        String modo;
+        //segun la bandera booleana
+        //si bandera = true, muestro recorrido caminando
+        //si bandera = false, muestro recorrido manejando
+        if(bandera)
+        {
+            modo = "&mode=walking";
+        }
+        else
+        {
+            modo = "&mode=driving";
+        }
+
+        //String url = "http://cuandopasa.smartmovepro.net/Paginas/Paginas/Recorridos.aspx/RecuperarRecorrido";
+
+        //armo la url
+        //String url ="https://maps.googleapis.com/maps/api/directions/json?origin="+this.lat+","+this.lon+"&destination=-31.640771, -60.671849"+ key + modo;
+        return "https://maps.googleapis.com/maps/api/directions/json?origin=-31.6177085,-60.6841818&destination=-31.640771, -60.671849"+ key + modo;
     }
 
 
@@ -693,37 +704,15 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
 
     public void mostrarCaminoCaminando()
     {
-        //LA URL PARA CONSULTAR AL WEBSERVICE SE USAR COMO SE VE:
-        //ORIGIN
-        //DESTINATION
-        //KEY
-        //SON PARAMETROS
-        //SI SE PONE EN EL BROWSER TE MUESTRA LA RESPUESTA JSON O LOS ERRORES
-        String key = "&key=" + "AIzaSyAY3_zaZiIwKVqIlbgTaTLCacnJaoklQ1U";
-
-        String modo;
-        //segun la bandera booleana
-        //si caminando = true, muestro recorrido caminando
-        //si caminando = false, muestro recorrido manejando
-        modo = "&mode=" + "walking";
-
-        //String url = "http://cuandopasa.smartmovepro.net/Paginas/Paginas/Recorridos.aspx/RecuperarRecorrido";
-
-        //armo la url
-        //String url ="https://maps.googleapis.com/maps/api/directions/json?origin="+this.lat+","+this.lon+"&destination=-31.640771, -60.671849"+ key + modo;
-        String url ="https://maps.googleapis.com/maps/api/directions/json?origin=-31.6177085,-60.6841818&destination=-31.640771, -60.671849"+ key + modo;
-
+        String url = armaUrl(true);
 
         Log.i("url: ",""+url);
 
         //Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
 
-        //Toast.makeText(getActivity().getApplicationContext(),url, Toast.LENGTH_LONG).show();
-
-
-
+        Toast.makeText(getActivity().getApplicationContext(),url, Toast.LENGTH_LONG).show();
+        
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -760,42 +749,19 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
 
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
-
     }
 
     public void mostrarCaminoManejando()
     {
-        //LA URL PARA CONSULTAR AL WEBSERVICE SE USAR COMO SE VE:
-        //ORIGIN
-        //DESTINATION
-        //KEY
-        //SON PARAMETROS
-        //SI SE PONE EN EL BROWSER TE MUESTRA LA RESPUESTA JSON O LOS ERRORES
-        String key = "&key=" + "AIzaSyAY3_zaZiIwKVqIlbgTaTLCacnJaoklQ1U";
-
-        String modo;
-        //segun la bandera booleana
-        //si caminando = true, muestro recorrido caminando
-        //si caminando = false, muestro recorrido manejando
-        modo = "&mode=" + "driving";
-
-        //String url = "http://cuandopasa.smartmovepro.net/Paginas/Paginas/Recorridos.aspx/RecuperarRecorrido";
-
-        //armo la url
-        //String url ="https://maps.googleapis.com/maps/api/directions/json?origin="+this.lat+","+this.lon+"&destination=-31.640771, -60.671849"+ key + modo;
-        String url ="https://maps.googleapis.com/maps/api/directions/json?origin=-31.6177085,-60.6841818&destination=-31.640771, -60.671849"+ key + modo;
-
+        String url = armaUrl(false);
 
         Log.i("url: ",""+url);
 
         //Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
 
-        //Toast.makeText(getActivity().getApplicationContext(),url, Toast.LENGTH_LONG).show();
-
-
+        Toast.makeText(getActivity().getApplicationContext(),url, Toast.LENGTH_LONG).show();
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
