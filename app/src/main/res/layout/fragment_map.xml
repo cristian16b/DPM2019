@@ -34,10 +34,11 @@
 
         <ImageButton
             android:id="@+id/botonColectivo"
-            android:layout_weight="1"
-            android:adjustViewBounds="true"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:onClick="mostrarWebCuandoPasa"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/autobus" />
 

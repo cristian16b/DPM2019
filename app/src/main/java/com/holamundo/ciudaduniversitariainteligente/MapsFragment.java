@@ -711,7 +711,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
         //Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
 
         Toast.makeText(getActivity().getApplicationContext(),url, Toast.LENGTH_LONG).show();
-        
+
         RequestQueue queue = Volley.newRequestQueue(getActivity());
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {

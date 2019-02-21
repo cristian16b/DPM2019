@@ -2,6 +2,7 @@ package com.holamundo.ciudaduniversitariainteligente;
 
 
 import android.Manifest;
+import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.FragmentManager;
 import android.content.Intent;
@@ -18,6 +19,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.Vector;
@@ -302,5 +305,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.mapsFragment.mostrarCaminoManejando();
     }
 
-
+    //abro el cuando pasa en el navegador del celular
+    //ver si se puede abrir en un activity
+    public void mostrarWebCuandoPasa(android.view.View view)
+    {
+        //REF:https://androidstudiofaqs.com/tutoriales/abrir-url-desde-boton-android-studio
+        Uri uri = Uri.parse("http://cuandopasa.smartmovepro.net/Paginas/Paginas/Recorridos.aspx");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
 }
