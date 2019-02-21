@@ -192,6 +192,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
         }
+        else if(id == R.id.menuComedor)
+        {
+            mostrarMenuComedor();
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -326,9 +330,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
     }
 
-    public void mostrarMenuComedor(android.view.View view)
+    private void mostrarMenuComedor()
     {
-        String url = "https://my-json-server.typicode.com/typicode/demo";
+        String url = "https://my-json-server.typicode.com/cristian16b/DPM2019/db";
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -338,19 +342,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 try
                 {
-
                         JSONObject jso = new JSONObject(response);
-                        //Toast.makeText(this,jso.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),jso.toString(),Toast.LENGTH_LONG).show();
 
-                        Log.i("jsonRuta: ",""+response);
-
+                        Log.i("Menu Comedor: ",""+response);
                 }
                 catch (JSONException e)
                 {
                     e.printStackTrace();
                     //Toast.makeText(this, "ERROR DE CONEXIÓN", Toast.LENGTH_LONG).show();
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override

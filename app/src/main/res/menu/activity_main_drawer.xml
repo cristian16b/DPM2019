@@ -14,6 +14,10 @@
             android:id="@+id/ultimas"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Últimas Busquedas" />
+        <item
+            android:id="@+id/menuComedor"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Menu Comedor" />
         <!--item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
