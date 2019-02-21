@@ -328,7 +328,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void mostrarMenuComedor(android.view.View view)
     {
-        String url = "";
+        String url = "https://my-json-server.typicode.com/typicode/demo";
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
