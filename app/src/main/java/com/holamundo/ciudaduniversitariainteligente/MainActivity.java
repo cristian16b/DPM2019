@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Instancio los objetos para ArmaCamino y el MapFragment
         oArmaCamino = new ArmaCamino(this);
         mapsFragment = new MapsFragment();
+        mapsFragment.setKey("AIzaSyAY3_zaZiIwKVqIlbgTaTLCacnJaoklQ1U");
         ultimasBusquedas = new ultimasBusquedas();
         ultimasBusquedas.setMainActivity(this);
 

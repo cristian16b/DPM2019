@@ -100,6 +100,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
 
     private static View view;
 
+    private String key;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (view != null) {
@@ -135,6 +137,19 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
 
         return view;
     }
+
+    //metodo para setear la key
+    public void setKey(String key)
+    {
+        this.key = key;
+    }
+
+    //metodo para devolver la key
+    public String getKey()
+    {
+        return this.key;
+    }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -222,7 +237,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
         //KEY
         //SON PARAMETROS
         //SI SE PONE EN EL BROWSER TE MUESTRA LA RESPUESTA JSON O LOS ERRORES
-        String key = "&key=" + "AIzaSyAY3_zaZiIwKVqIlbgTaTLCacnJaoklQ1U";
+        String key = "&key=" + getKey();
 
         String modo;
         //segun la bandera booleana
@@ -241,9 +256,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
 
         //Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
 
-        //Toast.makeText(getActivity().getApplicationContext(),url, Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity().getApplicationContext(),url, Toast.LENGTH_LONG).show();
 
-
+        /*
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
 
@@ -283,7 +298,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
 
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
-
+        */
 
         ///
 
@@ -322,6 +337,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
     {
         try
         {
+            //obtengo routes
             JSONArray jRoutes = jso.getJSONArray("routes");
 
             JSONObject routes = jRoutes.getJSONObject(0);
@@ -336,22 +352,22 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
 
             String aux =  tiempo.get("text").toString();
 
+            //conversion de hours a hora y mins a min
             String h = aux.replace("hour","hora");
             String m = h.replace("mins","min.");
 
-
+            //armo el menssje
             String mensaje = "La distancia es " + distance.get("text") + "\n" + "Tiempo estimado :" + m ;
-
-
+            //debug
             Toast.makeText(getActivity().getApplicationContext(),mensaje, Toast.LENGTH_LONG).show();
-
         }
         catch(JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private void trazarRuta(JSONObject jso) {
+    private void trazarRuta(JSONObject jso)
+    {
 
         JSONArray jRoutes;
         JSONArray jLegs;
